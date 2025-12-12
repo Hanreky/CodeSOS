@@ -16,6 +16,24 @@ function validarFormCadastro(): boolean {
 
     return true;
 }
+
+function validarFormLogin(): boolean {
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+    const senhaEl = document.getElementById('senha') as HTMLInputElement;
+    if (!senhaEl) return false;
+
+    const emailEl = document.getElementById("email") as HTMLInputElement;
+    if (!emailEl) return false;
+
+    if(senhaEl.value.trim() === "" || emailEl.value.trim() === "") {
+        alert("Preencha todos os campos!");
+        return false;
+    }
+
+    return true;
+}
+
 function validarEmail(): void {
 
     const emailEl = document.getElementById("email") as HTMLInputElement;

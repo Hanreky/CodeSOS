@@ -1,12 +1,19 @@
 <?php
 session_start();
-function cadastrarUsuario()
+include 'conUsuario.php';
+
+
+function logout()
 {
-    $_SESSION["usuario"] = $_POST["usuario"];
-    $_SESSION["senha"] = $_POST["senha"];
-    $_SESSION["email"] = $_POST["email"];
-    $_SESSION["isLogedIn"] = true;
+    echo "<script>alert('Logout realizado com sucesso!');</script>";
+    $_SESSION["isLogedIn"] = false;
+    $_SESSION['idusuario'] = null;
+    $_SESSION['usuario'] = null;
+    session_destroy();
+    header('Location: index.php');
+    exit;
 }
+
 
 if (isset($_POST["btnCadastrar"])) {
     cadastrarUsuario();
@@ -17,6 +24,8 @@ if (isset($_POST["btnCadastrar"])) {
 if (!isset($_SESSION["isLogedIn"])) {
     $_SESSION["isLogedIn"] = false;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +63,7 @@ if (!isset($_SESSION["isLogedIn"])) {
 
         <div class="navbar-brand">
 
-            <a class="navbar-item" href="index.html">
+            <a class="navbar-item" href="index.php">
                 <i class="fa-solid fa-code"></i><i class="fa-solid fa-handshake-angle"></i>
                 <p>CodeSOS</p>
             </a>
@@ -99,16 +108,19 @@ if (!isset($_SESSION["isLogedIn"])) {
 
                     <div class="buttons">
                         <?php
-                        if ($_SESSION["isLogedIn"]) {
-                            echo '<p class="navbar-item">' . $_SESSION["usuario"] . '</p>';
-                            echo '<a class="button is-light" onclick="logout()">
-                            Logout';
-                            echo '</a>';
+                        if ($_SESSION["isLogedIn"] === true) {
+                            echo '<form action="" method="post">';
+                            echo '<p class="navbar-item">' . $_SESSION['usuario'] . $_SESSION['idusuario'] . '</p>';
+                            echo '<input name="btnLogout" id="btnLogout" type="submit" value="Logout" class="button is-light">';
+                            echo '</form>';
+                            if (isset($_POST["btnLogout"])) {
+                                logout();
+                            }
                         } else {
                             echo '<a class="button is-primary" onclick="abrirFecharModal()">
                             <strong>Cadastrar</strong>
                         </a>
-                        <a class="button is-light">
+                        <a class="button is-light" href="login.php">
                             Login
                         </a>';
                         }
@@ -165,7 +177,7 @@ if (!isset($_SESSION["isLogedIn"])) {
                         <span class="icon is-small"><i class="fa-solid fa-eye"></i></span> <span
                             style="margin-left: 3px;">11.9k</span>
                     </a>
-                    
+
                 </figure>
                 <div class="media-content">
                     <div class="content">
@@ -210,7 +222,7 @@ if (!isset($_SESSION["isLogedIn"])) {
                         <span class="icon is-small"><i class="fa-solid fa-eye"></i></span> <span
                             style="margin-left: 3px;">500k</span>
                     </a>
-                    
+
                 </figure>
                 <div class="media-content">
                     <div class="content">
@@ -255,7 +267,7 @@ if (!isset($_SESSION["isLogedIn"])) {
                         <span class="icon is-small"><i class="fa-solid fa-eye"></i></span> <span
                             style="margin-left: 3px;">100</span>
                     </a>
-                    
+
                 </figure>
                 <div class="media-content">
                     <div class="content">
@@ -311,7 +323,13 @@ if (!isset($_SESSION["isLogedIn"])) {
 
                 <main>
                     <div class="box">
-                        <h1 class="title">Cadastrar nova conta</h1>
+
+                        <a><button onclick="abrirFecharModal()" style="position: absolute; right: 23%; top: 0.5%;"></a>
+                            <h1 class="title">x</h1>
+                        </button>
+
+                        <h1 class="title" style="margin-top: 12px;">Cadastrar nova conta</h1>
+
                         <div class="field">
                             <label class="label">Digite o seu usuário:</label>
                             <div class="control has-icons-left has-icons-right">
@@ -357,6 +375,8 @@ if (!isset($_SESSION["isLogedIn"])) {
                             <p class="help is-danger" id="msgSenha"></p>
                         </div>
 
+                        <a href="login.php">Já possui uma conta? Faça o login.</a> <br> <br>
+
                         <script src="script.js"></script>
                         <input name="btnCadastrar" id="btnCadastrar" type="submit" value="Cadastrar"
                             class="button is-dark" onclick="return validarFormCadastro()">
@@ -365,7 +385,7 @@ if (!isset($_SESSION["isLogedIn"])) {
             </form>
 
         </div>
-        <button class="modal-close is-large" aria-label="close" onclick="abrirFecharModal()"></button>
+
     </div>
 
 
