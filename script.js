@@ -1,4 +1,5 @@
 function validarFormCadastro() {
+    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     var usuarioEl = document.getElementById("usuario");
     if (!usuarioEl)
         return false;
@@ -9,6 +10,20 @@ function validarFormCadastro() {
     if (!emailEl)
         return false;
     if (usuarioEl.value.trim() === "" || senhaEl.value.trim() === "" || emailEl.value.trim() === "") {
+        alert("Preencha todos os campos!");
+        return false;
+    }
+    return true;
+}
+function validarFormLogin() {
+    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    var senhaEl = document.getElementById('senha');
+    if (!senhaEl)
+        return false;
+    var emailEl = document.getElementById("email");
+    if (!emailEl)
+        return false;
+    if (senhaEl.value.trim() === "" || emailEl.value.trim() === "") {
         alert("Preencha todos os campos!");
         return false;
     }

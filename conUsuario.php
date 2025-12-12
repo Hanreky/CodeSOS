@@ -56,11 +56,11 @@ function realizarLogin()
             header('Location: index.php');
             exit;
         } else {
-            
+            echo "<script>alert('Senha incorreta.');</script>";
 
         }
     } else {
-        
+        echo "<script>alert('Usuário não encontrado.');</script>";
     }
 
 }
