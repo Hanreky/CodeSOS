@@ -105,12 +105,15 @@ if (!isset($_SESSION["isLogedIn"])) {
 
             <div class="navbar-end">
                 <div class="navbar-item">
-
                     <div class="buttons">
                         <?php
                         if ($_SESSION["isLogedIn"] === true) {
+
                             echo '<form action="" method="post">';
-                            echo '<p class="navbar-item">' . $_SESSION['usuario'] . $_SESSION['idusuario'] . '</p>';
+                            echo '<span class="image" style="width: 30px; height: 30px;">
+                        <img src="http://rosanaregia.com.br/menu/1aa_imagens/caio.jpg" />
+                    </span>';
+                            echo '<p class="navbar-item">' . $_SESSION['usuario'] . '</p>';
                             echo '<input name="btnLogout" id="btnLogout" type="submit" value="Logout" class="button is-light">';
                             echo '</form>';
                             if (isset($_POST["btnLogout"])) {
@@ -125,7 +128,6 @@ if (!isset($_SESSION["isLogedIn"])) {
                         </a>';
                         }
                         ?>
-
                     </div>
 
                 </div>
@@ -182,7 +184,7 @@ if (!isset($_SESSION["isLogedIn"])) {
                 <div class="media-content">
                     <div class="content">
 
-                        <p><a href="post1.html"><span class="title">Como usar o pointer</span></a> <br>
+                        <p><a href="post.php"><span class="title">Como usar o pointer</span></a> <br>
                             <small>por</small> <strong>José Educado</strong> <small>@josee</small> <small>31m</small>
                             <br />
 
@@ -325,7 +327,7 @@ if (!isset($_SESSION["isLogedIn"])) {
                     <div class="box">
 
                         <a><button onclick="abrirFecharModal()" style="position: absolute; right: 23%; top: 0.5%;"></a>
-                            <h1 class="title">x</h1>
+                        <h1 class="title">x</h1>
                         </button>
 
                         <h1 class="title" style="margin-top: 12px;">Cadastrar nova conta</h1>
