@@ -1,5 +1,5 @@
 function validarFormCadastro(): boolean {
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
     const usuarioEl = document.getElementById("usuario") as HTMLInputElement;
     if (!usuarioEl) return false;
 
@@ -9,7 +9,10 @@ function validarFormCadastro(): boolean {
     const emailEl = document.getElementById("email") as HTMLInputElement;
     if (!emailEl) return false;
 
-    if(usuarioEl.value.trim() === "" || senhaEl.value.trim() === "" || emailEl.value.trim() === "") {
+    if (usuarioEl.value.trim() === "" 
+    || senhaEl.value.trim() === "" 
+    || emailEl.value.trim() === "") {
+        
         alert("Preencha todos os campos!");
         return false;
     }
@@ -18,7 +21,7 @@ function validarFormCadastro(): boolean {
 }
 
 function validarFormLogin(): boolean {
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
     const senhaEl = document.getElementById('senha') as HTMLInputElement;
     if (!senhaEl) return false;
@@ -26,7 +29,7 @@ function validarFormLogin(): boolean {
     const emailEl = document.getElementById("email") as HTMLInputElement;
     if (!emailEl) return false;
 
-    if(senhaEl.value.trim() === "" || emailEl.value.trim() === "") {
+    if (senhaEl.value.trim() === "" || emailEl.value.trim() === "") {
         alert("Preencha todos os campos!");
         return false;
     }
@@ -36,70 +39,63 @@ function validarFormLogin(): boolean {
 
 function validarEmail(): void {
 
-    const emailEl = document.getElementById("email") as HTMLInputElement;
-    if (!emailEl) return;
+    $(document).ready(function () {
 
-    let classesEmail: DOMTokenList;
-    let iconeEmail: DOMTokenList;
+        let email: string | undefined = $("#email").val()?.toString();
+        if (!email) return;
 
-    const msgEl = document.getElementById("msgEmail") as HTMLElement | null;
-    if (!msgEl) return;
+        if (email.indexOf("@") == -1
+            || email.indexOf(".") == -1
+            || email.indexOf(" ") != -1) {
 
-    classesEmail = emailEl.classList;
 
-    const iconeEmailEl = document.getElementById("iconeEmail") as HTMLElement | null;
-    if (!iconeEmailEl) return;
+            $("#email").removeClass("is-succsess");
+            $("#iconeEmail").removeClass("fa-check");
 
-    iconeEmail = iconeEmailEl.classList;
+            $("#email").addClass("is-danger");
+            $("#iconeEmail").addClass("fa-exclamation-triangle");
 
-    if (emailEl.value.indexOf("@") == -1
-        || emailEl.value.indexOf(".") == -1
-        || emailEl.value.indexOf(" ") != -1) {
+            $("#msgEmail").html("Email inválido!");
 
-        classesEmail.remove("is-success");
-        iconeEmail.remove("fa-check");
+        }
+        else {
 
-        classesEmail.add("is-danger");
-        iconeEmail.add("fa-exclamation-triangle");
+            $("#email").removeClass("is-danger");
+            $("#iconeEmail").removeClass("fa-exclamation-triangle");
 
-        msgEl.innerHTML = "Email inválido!";
-    }
-    else {
-        classesEmail.remove("is-danger");
-        iconeEmail.remove("fa-exclamation-triangle");
+            $("#email").addClass("is-success");
+            $("#iconeEmail").addClass("fa-check");
 
-        classesEmail.add("is-success");
-        iconeEmail.add("fa-check");
-        msgEl.innerHTML = "";
-    }
+            $("#msgEmail").html("");
+
+        }
+    });
 }
 
 function validarUsuario(): void {
     const usuarioEl = document.getElementById("usuario") as HTMLInputElement
 
-    let classesUsuario: DOMTokenList = usuarioEl.classList;
-    let iconeUsuario: DOMTokenList = document.getElementById("iconeUsuario")!.classList;
-    
-    const msgEl = document.getElementById("msgUsuario") as HTMLElement | null;
-    if (!msgEl) return;
+    let usuario: string | undefined = $("#usuario").val()?.toString();
+    if(!usuario) return;
 
-    if(usuarioEl.value.trim() === "") {
-        classesUsuario.remove("is-success");
-        iconeUsuario.remove("fa-check");
+    if (usuario.trim() === "") {
 
-        classesUsuario.add("is-danger");
-        iconeUsuario.add("fa-exclamation-triangle");
+        $("#usuario").removeClass("is-success");
+        $("#iconeUsuario").removeClass("fa-check");
 
-        msgEl.innerHTML = "Digite o seu usuário!";
+        $("#usuario").addClass("is-danger");
+        $("#iconeUsuario").addClass("fa-exclamation-triangle");
+
+        $("#msgUsuario").html("Digite o seu usuário!");
     }
-    else{
-        classesUsuario.remove("is-danger");
-        iconeUsuario.remove("fa-exclamation-triangle");
+    else {
+        $("#usuario").removeClass("is-danger");
+        $("#iconeUsuario").removeClass("fa-exclamation-triangle");
 
-        classesUsuario.add("is-success");
-        iconeUsuario.add("fa-check");
+        $("#usuario").addClass("is-success");
+        $("#iconeUsuario").addClass("fa-check");
 
-        msgEl.innerHTML = "";
+        $("#msgUsuario").html("");
     }
 
 }
@@ -114,7 +110,7 @@ function validarSenha(): void {
     const msgEl = document.getElementById("msgSenha") as HTMLElement | null;
     if (!msgEl) return;
 
-    if(senhaEl.value.trim() === "" || (senhaEl.value.length < 8 || senhaEl.value.length > 20)) {
+    if (senhaEl.value.trim() === "" || (senhaEl.value.length < 8 || senhaEl.value.length > 20)) {
         classesSenha.remove("is-success");
         iconeSenha.remove("fa-check");
 
@@ -123,7 +119,7 @@ function validarSenha(): void {
 
         msgEl.innerHTML = "A senha deve ter entre 8 e 20 caracteres!";
     }
-    else{
+    else {
         classesSenha.remove("is-danger");
         iconeSenha.remove("fa-exclamation-triangle");
 
@@ -135,13 +131,8 @@ function validarSenha(): void {
 
 }
 
-function abrirFecharModal(): void{
-    const modalEl = document.getElementById("modal") as HTMLElement;
-    
-    if(modalEl.classList.contains("is-active")){
-        modalEl.classList.remove("is-active");
-    }
-    else{
-        modalEl.classList.add("is-active");
-    }
-}
+$(document).ready(function () {
+    $("#modalCadastrar").click(function () {
+        $("div.modal").addClass("is-active");
+    });
+});

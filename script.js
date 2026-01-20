@@ -1,5 +1,4 @@
 function validarFormCadastro() {
-    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     var usuarioEl = document.getElementById("usuario");
     if (!usuarioEl)
         return false;
@@ -30,56 +29,48 @@ function validarFormLogin() {
     return true;
 }
 function validarEmail() {
-    var emailEl = document.getElementById("email");
-    if (!emailEl)
-        return;
-    var classesEmail;
-    var iconeEmail;
-    var msgEl = document.getElementById("msgEmail");
-    if (!msgEl)
-        return;
-    classesEmail = emailEl.classList;
-    var iconeEmailEl = document.getElementById("iconeEmail");
-    if (!iconeEmailEl)
-        return;
-    iconeEmail = iconeEmailEl.classList;
-    if (emailEl.value.indexOf("@") == -1
-        || emailEl.value.indexOf(".") == -1
-        || emailEl.value.indexOf(" ") != -1) {
-        classesEmail.remove("is-success");
-        iconeEmail.remove("fa-check");
-        classesEmail.add("is-danger");
-        iconeEmail.add("fa-exclamation-triangle");
-        msgEl.innerHTML = "Email inválido!";
-    }
-    else {
-        classesEmail.remove("is-danger");
-        iconeEmail.remove("fa-exclamation-triangle");
-        classesEmail.add("is-success");
-        iconeEmail.add("fa-check");
-        msgEl.innerHTML = "";
-    }
+    $(document).ready(function () {
+        var _a;
+        var email = (_a = $("#email").val()) === null || _a === void 0 ? void 0 : _a.toString();
+        if (!email)
+            return;
+        if (email.indexOf("@") == -1
+            || email.indexOf(".") == -1
+            || email.indexOf(" ") != -1) {
+            $("#email").removeClass("is-succsess");
+            $("#iconeEmail").removeClass("fa-check");
+            $("#email").addClass("is-danger");
+            $("#iconeEmail").addClass("fa-exclamation-triangle");
+            $("#msgEmail").html("Email inválido!");
+        }
+        else {
+            $("#email").removeClass("is-danger");
+            $("#iconeEmail").removeClass("fa-exclamation-triangle");
+            $("#email").addClass("is-success");
+            $("#iconeEmail").addClass("fa-check");
+            $("#msgEmail").html("");
+        }
+    });
 }
 function validarUsuario() {
+    var _a;
     var usuarioEl = document.getElementById("usuario");
-    var classesUsuario = usuarioEl.classList;
-    var iconeUsuario = document.getElementById("iconeUsuario").classList;
-    var msgEl = document.getElementById("msgUsuario");
-    if (!msgEl)
+    var usuario = (_a = $("#usuario").val()) === null || _a === void 0 ? void 0 : _a.toString();
+    if (!usuario)
         return;
-    if (usuarioEl.value.trim() === "") {
-        classesUsuario.remove("is-success");
-        iconeUsuario.remove("fa-check");
-        classesUsuario.add("is-danger");
-        iconeUsuario.add("fa-exclamation-triangle");
-        msgEl.innerHTML = "Digite o seu usuário!";
+    if (usuario.trim() === "") {
+        $("#usuario").removeClass("is-success");
+        $("#iconeUsuario").removeClass("fa-check");
+        $("#usuario").addClass("is-danger");
+        $("#iconeUsuario").addClass("fa-exclamation-triangle");
+        $("#msgUsuario").html("Digite o seu usuário!");
     }
     else {
-        classesUsuario.remove("is-danger");
-        iconeUsuario.remove("fa-exclamation-triangle");
-        classesUsuario.add("is-success");
-        iconeUsuario.add("fa-check");
-        msgEl.innerHTML = "";
+        $("#usuario").removeClass("is-danger");
+        $("#iconeUsuario").removeClass("fa-exclamation-triangle");
+        $("#usuario").addClass("is-success");
+        $("#iconeUsuario").addClass("fa-check");
+        $("#msgUsuario").html("");
     }
 }
 function validarSenha() {
@@ -106,12 +97,8 @@ function validarSenha() {
         msgEl.innerHTML = "";
     }
 }
-function abrirFecharModal() {
-    var modalEl = document.getElementById("modal");
-    if (modalEl.classList.contains("is-active")) {
-        modalEl.classList.remove("is-active");
-    }
-    else {
-        modalEl.classList.add("is-active");
-    }
-}
+$(document).ready(function () {
+    $("#modalCadastrar").click(function () {
+        $("div.modal").addClass("is-active");
+    });
+});
